@@ -21,7 +21,7 @@ from keras.utils import to_categorical
 from keras.callbacks import ModelCheckpoint
 
 # Loading the data
-file = open("Text_project.txt", encoding="utf8").read()
+file = open("Text_project.txt").read()
 
 """# New Section"""
 
@@ -32,7 +32,7 @@ def tokenize_words(input):
     tokenizer = RegexpTokenizer(r'\w+')
     tokens = tokenizer.tokenize(input)
     filtered = filter(lambda token: token not in stopwords.words('english'), tokens)
-    return "".join(filtered)
+    return " ".join(filtered)
 processed_input = tokenize_words(file)
 
 # Converting Characters to numbers
@@ -56,9 +56,6 @@ for i in range(0, input_len - seq_length, 1):
     out_seq = processed_input[i+seq_length]
     x_data.append([char_to_num[char] for char in in_seq])
     y_data.append(char_to_num[out_seq])
-
-n_patterns = len(x_data)
-print("Total patterns:", n_patterns)
 
 n_patterns = len(x_data)
 print("Total patterns:", n_patterns)
